@@ -1,0 +1,138 @@
+Food Ordering App Planning
+
+-- Header
+      - Logo
+      - Nav Items (Home,AboutUs,Cart)
+
+-- Body
+      - Search Component
+      - Restaurant Card container
+          - RestaurantCard
+             - Image
+             - Restaurant Name
+             - Star Rating
+             - Cuisines
+             - Delivery Time
+
+-- Footer
+      - Copyright
+      - Links
+      - Address
+      - Contact
+
+
+-- Styling 
+      1.) style in index.css
+
+      2.) inline styling [Not a preferred way]
+      
+      e.g. #1
+
+      const styleCard = {
+      backgroundColor: "#f0f0f0",
+      };
+
+      const RestaurantCard = () => {
+      return (
+      <div className="res-card" style={styleCard}>
+      <h3>Meghna Foods</h3>
+      </div>
+      );
+      };
+
+      e.g. #2
+       const RestaurantCard = () => {
+      return (
+      <div className="res-card" style={{backgroundColor: "#f0f0f0"}}>
+      <h3>Meghna Foods</h3>
+      </div>
+      );
+      };
+
+
+-- Props
+In order to pass the data to the component, we can do it via props.
+Props are nothing but the argument to the function. that is props to the functional Component
+Passing a prop to the component is similar to passing the argument to the function
+
+e.g.
+<RestaurantCard resName="KFC" cuisine="Burger,Fast Food" />
+
+resName,cuisine are props.
+
+react will take these props and it will wrap inside the object and it will pass in the component
+props is the object
+
+ const RestaurantCard = (props) => {
+      return (
+      <div className="res-card" style={{backgroundColor: "#f0f0f0"}}>
+      <h3>{props.resName}</h3>
+      <h3>{props.cuisine}</h3>
+      </div>
+   );
+};
+
+//OR 
+
+We can also destructure on the fly --> destructuing the props object
+
+ const RestaurantCard = ({resName,cuisine}) => {
+      return (
+      <div className="res-card" style={{backgroundColor: "#f0f0f0"}}>
+      <h3>{resName}</h3>
+      <h3>{cuisine}</h3>
+      </div>
+   );
+};
+
+//OR
+
+ const RestaurantCard = (props) => {
+   const {resName,cuisine} = props;
+      return (
+      <div className="res-card" style={{backgroundColor: "#f0f0f0"}}>
+      <h3>{resName}</h3>
+      <h3>{cuisine}</h3>
+      </div>
+   );
+};
+
+-- Config driven UI
+      - Website is driven by the config.
+      - controlling the UI using data. the config comes from the backend.
+
+E.g 
+Suppose in B'lore I've various offers or data to display in the swiggy UI. Hence, we get the data accordingly
+similary, for other cities data will be different. Hence, UI data will be specific as per the city.
+Thus, these type of concept is called as config driven UI where we are controlling the UI using coming from the backend
+
+For image :
+https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/69a061b7e0f951cef2b4947946f94ec6
+
+const cloudinaryImageId =  props?.resData?.info;
+ src={
+          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
+          cloudinaryImageId
+        }
+
+media-assets.swiggy.com --> is the CDN for swiggy images
+
+-- Whenever we want to write the JavaScript in JSX, write in the {}
+
+-- Keys 
+    - Always give the key whenever map is used.
+
+Suppose if we don't give the id in the map. Then, if the new Restaurant comes in, react will re render all 
+the restaurant cards inside the container. because it doesn't know which is the new card and it will 
+treat all the card as same.
+
+But if we have the unique id, then if new restaurant comes in with the new id then, react knows that
+all other ids are already exiting and this is the new one. hence, it will just re render only the new 
+restaurant card.
+
+Note : We can put index as keys but React itself says that, putting index as key is the bad practice. 
+Index as a key is an anti-pattern. Hence, index is not recommended.
+
+- Not using keys (not acceptable) <<<< index as key <<< unique id (best practice)
+
+This is one of the optimization technique.

@@ -19,7 +19,6 @@ console.log(heading);
 
 -- React Element :
 const jsxHeading = (
-
   <h1 id="jsxHeading" tabIndex="5">
     Food Farm from JSX
   </h1>
@@ -65,7 +64,6 @@ root.render(<HeadingComponent/>)
 One function inside another is function composition
 e.g.
 const HeadingComponent = () => (
-
   <div id="container">
     <h1 className="header">React Functional Component</h1>
     <Title />
@@ -75,9 +73,10 @@ const HeadingComponent = () => (
 -- We can inject any JS code in the {},mathematical expression, function invocation,console.log()
 e.g
 const element = 1000;
-const Title = () => <h1 className="title">Title</h1>;
-const HeadingComponent = () => (
 
+const Title = () => <h1 className="title">Title</h1>;
+
+const HeadingComponent = () => (
   <div id="container">
     {Title()}
     <h2>{element}</h2>
