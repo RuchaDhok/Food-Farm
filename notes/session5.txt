@@ -1,0 +1,134 @@
+
+Everything we can do with html,css,js.
+ - Then why react ??
+    - It makes the life of developer easy. Easy to build large application.
+
+LET'S GET HOOKED
+
+React doesn’t have opinions on how you put files into folders
+
+-- Best practice 
+    - Separate files for all the components
+
+ -- Folder Structue (https://legacy.reactjs.org/docs/faq-structure.html)
+    - All the main files in the src folder.
+    - File name as same as the functional component name.
+    - FileName.js or FileName.jsx ?
+        - It hardly matters. So, it's a personal choice
+    - Any hardcoded data/url string/logo string should not be in the component file.
+      Keep in the separate file. [ utils folder / constant.js ]. 
+      If not a component then name the file name starting with lowercase. (e.g. constant.js)
+      Give the constant name in the contant.js file in caps/snake case (e.g. CDN_URL)
+      Mock data in the mock data file (e.g. mockData.js)
+
+-- import/export files 
+    There are two types of export/import
+
+    Type - I
+        - Default Export/Import
+        export default Component;
+        import Component from "path";
+
+    1.) Exporting Header ( Default Export )
+            -- In one file we can have only one DEFAULT EXPORT
+
+        import React from "react";
+
+        const Header = () => {
+        return (
+            <div className="header">
+                Header
+            </div>
+        );
+        };
+
+        export default Header;
+
+    2.) Importing Header in App.js (Default Import)
+
+        import Header from "./components/Header";
+        
+        or - import Header from "./components/Header.js"; //we can also add .js extensions. 
+
+        const AppLayout = () => {
+        return (
+            <div className="app">
+            <Header />
+            </div>
+        );
+        };
+
+    Type - II
+         - Named Export/Import
+        export const Component; or export const data
+        import {Component} from "path"; or import {data} from "path"
+
+    1.) Exporting Header ( Named Export ) 
+            -- Generally, when we need to export multiple things from one file.
+
+        import React from "react";
+
+        export const Header = () => {
+        return (
+            <div className="header">
+                Header
+            </div>
+        );
+        };
+     
+     
+     In constant.js
+
+      export const CDN_URL =
+        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
+
+      export const LOGO_URL =
+        "https://images.crunchbase.com/image/upload/c_pad,f_auto,q_auto:eco,dpr_1/gbllr6pmzare1fdc0ayt";
+
+
+    2.) Importing Header & Constants (Named Import)
+
+      import { Header } from "./components/Header";
+
+      import { CDN_URL } from "../utils/constant";
+
+      import { LOGO_URL } from "../utils/constant";
+
+Strangely, we can use both
+        export const Header = () =>{
+            return <div>Header</div>
+        }
+
+        export default Header;
+
+        import {Header} from "path"
+
+        import Header from "path"
+
+--------------------------------------------------------------------------------
+
+-- REACT HOOKS (Normal React Utility function)
+
+    - creating button with top rated restaurant (rating > 4 stars)
+
+    - React is fast because of it is fast and efficient in DOM manipulation
+
+    - React Hook is the normal JS function which is given by react written Fb developers
+
+1.) useState() - Super powerful state variables in react
+                 Scope of state variable is the component
+                 
+                 useState(defaultValue)
+
+                 useState keeps the UI in sync with the data layer.
+                 whereas, normal JS variable don't update the UI
+
+                 whenever, a state variable updates react re renders the component.
+
+                 const [name,setName] = useState("Rucha");
+
+                 whenever the name is changed or setName() is called to change the name (i.e. state)
+                 hence, the state variable updates thus react re renders the component.
+
+2.) useEffect() 
+
