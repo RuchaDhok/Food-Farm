@@ -35,6 +35,6 @@ CORS Chrome extension can bypass the cors issue.
 
 -- Whenever state variable updates, react triggers a reconciliation cycle (re-renders the component)
    but it only update that specific part of dom [old Virtual DOM is compared with the new virtual DOM using
-   the diff algorith and the difference is updated]
+   the diff algorithm and the difference is updated]
 
 -- React Fiber is the new way of reconciliation process to efficiently process the DOM.

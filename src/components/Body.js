@@ -29,9 +29,6 @@ const Body = () => {
   // if (listOfRestaurants.length === 0) {
   //   return <Shimmer />;
   // }
-
-  console.log("Render --- ");
-
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
@@ -40,18 +37,24 @@ const Body = () => {
         <div className="search">
           <input
             type="text"
-            className="input-search"
+            className="search-box"
             value={searchText}
             onChange={(e) => {
+              if (e.target.value == "") {
+                setSearchText("");
+                setListOfRestaurants(originalList);
+              }
               setSearchText(e.target.value);
-              console.log(e.target.value);
             }}
           />
           <button
-            onClick={() => {
-              //Filter the restro cart and update the UI
-              console.log(searchText);
-            }}
+            onClick={() =>
+              setListOfRestaurants(
+                listOfRestaurants.filter((res) =>
+                  res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                )
+              )
+            }
           >
             Search
           </button>
