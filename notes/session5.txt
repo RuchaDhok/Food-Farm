@@ -130,5 +130,23 @@ Strangely, we can use both
                  whenever the name is changed or setName() is called to change the name (i.e. state)
                  hence, the state variable updates thus react re renders the component.
 
-2.) useEffect() 
+                 Note : Never create useState variable outside the component.
+                        Never create useState variable inside the if/else,for loop, functions
+                        It will create inconsistency.
+                        
+
+2.) useEffect(()=>{},[]) - useEffect is called after every render of the component.
+                           Dependency array changes the behavior of the render.
+
+                           without Dependency array : useEffect is called on every component render.
+
+                           If Dependency array is empty [] : useEffect is called on only initial render 
+                                                             and just once.
+
+                           If Dependency array is [btnName] : called everytime btnName is updated.
+
+                                                                - component renders
+                                                                - useEffect called
+                                                                - also everytime btnName is updated
+
 

@@ -1,0 +1,9 @@
+#ROUTING
+
+1.) Install react-router-dom
+        npm install react-router-dom
+
+2.) Create routing configuration in App.js
+
+3.) import {createBrowserRouter} from "react-router-dom"
+      -- will create routing configuration.
