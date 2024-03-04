@@ -33,12 +33,51 @@ root.render(<RouterProvider router={appRouter} />);
     and change the body as per the path.
     Hence creating children routes.
 
+    const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/restaurants/:resId",
+        element: <RestaurantMenu />,
+      },
+    ],
+    errorElement: <Error />,
+  },
+]);
+
+In order to put these children. we use <Outlet/> from "react-router-dom"
+
+const AppLayout = () => {
+  return (
+    <div className="app">
+      <Header />
+      <Outlet />
+    </div>
+  );
+};
+
 8.)       <li>
             <a href="/about">About Us</a>
           </li>
     Using <a></a> the page reloads. But navigating to different links can be done without reloading the 
     page.
-    react-router-dom gives <Link></Link> tag which works exactly like <a></a> but without reloading the page.
+    react-router-dom gives <Link></Link> tag which works exactly like <a></a> but without reloading the 
+    page.
+
+    <Link to=""></Link> behind the scenes uses <a></a>
+
+    Link is a wrapper over anchor tag. react-router-dom will keep the track that this is <Link></Link>
+    and we don't have to refresh the page.
 
     This is called as SINGLE PAGE APPLICATION (SPA)
      Navigating from one page to another is just changing the component and not reloading the page.
@@ -55,3 +94,23 @@ root.render(<RouterProvider router={appRouter} />);
         - Suppose we have index.html, about.html in <a></a>
         When we click on About, it makes the network call to about.html, fetches about.html and renders
         on the web page. And the whole page is getting reloaded
+
+
+#DYNAMIC ROUTING
+Creating RestaurantMenu as per the restaurants.
+
+In App.js, in routing configuration -- we need to give dynamic path like below:
+
+
+      {
+        path: "/restaurants/:resId",
+        element: <RestaurantMenu />,
+      },
+
+:resId - is dynamic 
+
+In order to fetch the parameter details, react-router-dom gives us useParams() hook.
+
+const params = useParams();
+
+params is an object with the resId.
