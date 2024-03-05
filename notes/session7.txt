@@ -22,12 +22,24 @@
 
 5.) Provide the configuration to render it.
     import {RouterProvider} from "react-router-dom"
-    -- RouterProvider will provider will provide the configuration to our app.
+    -- RouterProvider will provide the configuration to our app.
 
 root.render(<RouterProvider router={appRouter} />);
 
 6.) react-router-dom provides the hook, useRouteError --> It gives more information about the error
     const err = useRouteError();
+
+      const appRouter = createBrowserRouter([
+        {
+        path: "/",
+        element: <AppLayout />,
+        errorElement: <Error />,
+        },
+        {
+        path: "/about",
+        element: <About />,
+        },
+    ]);   
 
 7.) Header page should always be there. Keep the header intact
     and change the body as per the path.
