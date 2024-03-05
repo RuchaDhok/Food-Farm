@@ -15,11 +15,11 @@ import React from "react";
 class About extends React.Component {
   constructor(props) {
     super(props);
-    console.log("Parent Constructor");
+    // console.log("Parent Constructor");
   }
 
   componentDidMount() {
-    console.log("Parent Component Did Mount");
+    // console.log("Parent Component Did Mount");
   }
 
   // componentDidUpdate() {
@@ -27,14 +27,14 @@ class About extends React.Component {
   // }
 
   render() {
-    console.log("Parent Render");
+    // console.log("Parent Render");
     return (
       <div>
         <h1>About Class Component</h1>
-        <UserClass name={"First"} location={"Bengaluru (Class)"} />
-        {/* <UserClass name={"Second"} location={"US"} />
-        <UserClass name={"Third"} location={"US"} /> */}
-        {/* <User name={"Rucha Dhok (function)"} /> */}
+        {/* <UserClass uName={"First"} uLocation={"Bengaluru (Class)"} /> */}
+        {/* <UserClass uName={"Second"} uLocation={"US"} />
+        <UserClass uName={"Third"} uLocation={"US"} /> */}
+        {/* <User uName={"Rucha Dhok (function)"} /> */}
       </div>
     );
   }

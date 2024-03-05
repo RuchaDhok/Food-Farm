@@ -102,7 +102,7 @@ this.state = {
     return (
       <div>
         <h1>About Class Component</h1>
-        <UserClass name={"First"} location={"Bengaluru (Class)"} />
+        <UserClass uName={"First"} uLocation={"Bengaluru (Class)"} />
       </div>
     );
   }
@@ -128,8 +128,8 @@ i.e.
     return (
       <div>
         <h1>About Class Component</h1>
-        <UserClass name={"First"} location={"Bengaluru (Class)"} />
-        <UserClass name={"Second"} location={"US"} />
+        <UserClass uName={"First"} uLocation={"Bengaluru (Class)"} />
+        <UserClass uName={"Second"} uLocation={"US"} />
       </div>
     );
   }
@@ -186,8 +186,8 @@ How to make an API call ?
     //Creating state variable
     this.state = {
       userInfo: {
-        login: "Dummy",
-        type: "Default",
+        name: "Dummy",
+        location: "Default",
       },
     };
   }
@@ -207,8 +207,8 @@ How to make an API call ?
 
       return (
       <div className="user-card">
-        <h2>Name : {login}</h2>
-        <h3>Location : {type} </h3>
+        <h2>Name : {name}</h2>
+        <h3>Location : {location} </h3>
         <h4>Contact : 8987022675</h4>
       </div>
     );
@@ -238,7 +238,7 @@ First Child Render
 First Child ComponentDidUpdate
 
 
-Example :
+# Life Cycle explaination in short
 
 --- Mounting Life cycle ---
 
@@ -275,3 +275,117 @@ First Child Render
 First Child ComponentDidUpdate
 First Child ComponentWillUnmount
 
+-----------xxxxxxxxxxxxxx-------------
+
+- Never ever compare react lifecycle to useEffect()
+
+- useEffect() is not equivalent to class lifecycle
+
+-- After every update of state varibale it re renders the component and
+   ComponentDidUpdate() is called.
+   
+in useEffect(({}),[count]), count changes it re renders the component and useEffect() is called.
+
+in class based
+
+componentDidUpdate(prevProps,prevState){
+  if(this.state.count !== prevState.count){
+    //code
+  } 
+}
+
+-----------xxxxxxxxxxxxxx-------------
+
+If we want to implement some piece of code for different change in dependency
+
+  useEffect(() => {
+    //API calls
+    fetchUserInfo();
+  }, [count]);
+
+  useEffect(() => {
+    //API calls
+    fetchUserInfo();
+  }, [count2]);
+
+
+  But in class based it's like -- 
+
+  componentDidUpdate(prevProps,prevState){
+  if(this.state.count !== prevState.count){
+    //code
+  } 
+   if(this.state.count !== prevState.count2){
+    //code
+  } 
+}
+
+- componentWillUnmount is called when we are leaving the component.
+ Single page but multiple components.
+ 
+  we need to clear things up when we are leaving the component.
+
+  Suppose we have setInterval in component did mount for every second.
+
+  We can observe, setInterval() is getting called after every second.
+  Even if we leave the component. It still gets called.
+
+   async componentDidMount() {
+    this.setInterval(() => {
+      console.log("Class based Comp");
+    }, 1000);
+  }
+
+  This is the problem with SPAs, it's not reloading the page, it is just re rendering the
+  component. Hence, Even if we leave the component. setInterval() still gets called.
+  This lags the performance.
+
+  Thus we need to clear the interval. 
+  And that is done in componentWillUnmount();
+
+ componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  Now, the interval stops whenever we leave the component.
+
+
+  -----------xxxxxxxxxxxxxx-------------
+
+  Creating setInterval() in useEffect() :
+
+    useEffect(() => {
+    const interval = setInterval(() => {
+      console.log("Functional Comp setInterval");
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  In order to stop the interval when the component is changing,
+  then we need to clean the interval.
+
+  And this can be done, by returning the function in useEffect()
+
+ return () => {
+      clearInterval(interval);
+    };
+
+
+output [User.js] : 
+
+  useEffect(() => {
+    console.log("useEffect");
+    return () => {
+      console.log("useEffect return");
+    };
+  }, []);
+
+  console.log("Render");
+
+
+ Render 
+ useEffect
+ useEffect return

@@ -7,11 +7,24 @@ const User = ({ name }) => {
 
   useEffect(() => {
     //API calls
-    fetchUserInfo();
+    //fetchUserInfo();
   }, []);
 
+  useEffect(() => {
+    console.log("useEffect");
+    const interval = setInterval(() => {
+      console.log("Functional Comp setInterval");
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+      console.log("useEffect return");
+    };
+  }, []);
+
+  console.log("Render");
+
   const fetchUserInfo = async () => {
-    const data = await fetch("https://api.github.com/users/Rucha-Dhok");
+    const data = await fetch("https://api.github.com/users/RuchaDhok");
     const json = await data.json();
     setUserInfo(json);
   };
@@ -27,8 +40,8 @@ const User = ({ name }) => {
         Click Me!!
       </button>
       <h1>Count2 : {count2}</h1>
-      <h2>Name : {userInfo.login}</h2>
-      <h3>Location : Bengaluru </h3>
+      <h2>Name : {userInfo.name}</h2>
+      <h3>Location : {userInfo.location} </h3>
       <h4>Contact : 8987022675</h4>
     </div>
   );
