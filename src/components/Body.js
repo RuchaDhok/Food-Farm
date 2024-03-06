@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
-import { SWIGGY_API } from "../utils/constant";
 import { Link } from "react-router-dom";
+import useRestaurantData from "../utils/useRestaurantData";
+import useOnlineStatus from "../utils/useOnlineStatus";
 //import resList from "../utils/mockData";
 
 const Body = () => {
-  const [originalList, setOriginalList] = useState([]);
-  const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [flag, setFlag] = useState(true);
   const [searchText, setSearchText] = useState("");
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const data = await fetch(SWIGGY_API);
-    const json = await data.json();
-    const restroInfo =
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants;
-    setOriginalList(restroInfo);
-    setListOfRestaurants(restroInfo);
-  };
+  const [originalList, listOfRestaurants, setListOfRestaurants] =
+    useRestaurantData();
 
   //Conditional Rendering
   // if (listOfRestaurants.length === 0) {
   //   return <Shimmer />;
   // }
+
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus === false)
+    return (
+      <>
+        <h1>Looks like you're offline!!</h1>
+        <h2> Please check your internet connection.</h2>
+      </>
+    );
+
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
@@ -65,7 +64,7 @@ const Body = () => {
             //Filter logic
             if (flag == true) {
               const filteredList = listOfRestaurants.filter(
-                (res) => res.info.avgRating > 4.5
+                (res) => res.info.avgRating > 4.2
               );
               setListOfRestaurants(filteredList);
               setFlag(false);
