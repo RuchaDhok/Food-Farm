@@ -32,11 +32,11 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="flex">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid border-black shadow-lg"
             value={searchText}
             onChange={(e) => {
               if (e.target.value == "") {
@@ -47,6 +47,7 @@ const Body = () => {
             }}
           />
           <button
+            className="px-4 py-2 bg-orange-50 m-4 rounded-lg"
             onClick={() =>
               setListOfRestaurants(
                 listOfRestaurants.filter((res) =>
@@ -58,26 +59,29 @@ const Body = () => {
             Search
           </button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            //Filter logic
-            if (flag == true) {
-              const filteredList = listOfRestaurants.filter(
-                (res) => res.info.avgRating > 4.2
-              );
-              setListOfRestaurants(filteredList);
-              setFlag(false);
-            } else {
-              setListOfRestaurants(originalList);
-              setFlag(true);
-            }
-          }}
-        >
-          {flag ? "Top Rated Restaurants" : "All Restaurants"}
-        </button>
+        <div className="m-4 p-4 flex items-center">
+          {" "}
+          <button
+            className="px-4 py-2 bg-slate-100 rounded-lg"
+            onClick={() => {
+              //Filter logic
+              if (flag == true) {
+                const filteredList = listOfRestaurants.filter(
+                  (res) => res.info.avgRating > 4.2
+                );
+                setListOfRestaurants(filteredList);
+                setFlag(false);
+              } else {
+                setListOfRestaurants(originalList);
+                setFlag(true);
+              }
+            }}
+          >
+            {flag ? "Top Rated Restaurants" : "All Restaurants"}
+          </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {/* <RestaurantCard resData={resList[0]} />
         <RestaurantCard resData={resList[1]} /> */}
         {listOfRestaurants.map((resObj) => (

@@ -1,0 +1,57 @@
+#CSS
+
+-- Ways of styling components : 
+
+1.) Putting css in index.css
+2.) SASS/SCSS - writing css with some super powers. [Not a recommended way]
+3.) Styled components [common way]
+4.) Using liraries and framework - makes life very easy
+      - chakraUI, materialUI, bootstrap, ant-design, tailwind css
+
+# Tailwind CSS
+
+- Rapidly build modern websites without ever leaving your HTML.
+- https://tailwindcss.com/docs/guides/parcel [because our project uses parcel]
+
+- Configure tailwind CSS with the project
+  1.) npm install -D tailwindcss postcss
+  2.) npx tailwindcss init
+
+npm install -D tailwindcss postcss : 
+    tailwindcss behind the scene uses postcss.
+    postcss is a tool for transforming CSS with Javascript.
+
+npx tailwindcss init : 
+    Executing/invoking the tailwindcss. 
+    And it generate tailwind.config.js [configuration file for tailwind]
+        -> content: ["./src/**/*.{html,js,ts,jsx,tsx}"] --> we can use tailwind in any of these files.
+
+
+    3.) Create ".postcssrc" in the project root.
+        - It's a configuration file for postcss.
+        - In the config file, we need to tell postcss that we are using tailwind.
+        - If we are using tailwind, then parcel needs to use postcssrc to read/understand tailwind.
+
+    4.) Importing tailwind in index.css file
+
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+
+- Tailwind gives classname for everything.
+
+If we don't have the class for specific value.
+then we can hard code the value like : w-[200px]
+
+Cons of Tailwind :
+- Code looks ugly
+
+Pros of Tailwind :
+- It is very light weight.
+- When parcel will make the bundle of the css, it will only take the css which is required in our 
+  webpage.
+- Suppose we have used m-4 multiple times, so it will import m-4 class only once.
+- We can build complex UI
+- Different css for different screen size
+- dark to light mode very easily
+- writing css on the go
