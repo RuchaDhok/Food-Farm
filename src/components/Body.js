@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useRestaurantData from "../utils/useRestaurantData";
@@ -12,6 +12,8 @@ const Body = () => {
 
   const [originalList, listOfRestaurants, setListOfRestaurants] =
     useRestaurantData();
+
+  const RestaurantPromoted = withPromotedLabel(RestaurantCard);
 
   //Conditional Rendering
   // if (listOfRestaurants.length === 0) {
@@ -87,7 +89,11 @@ const Body = () => {
         {listOfRestaurants.map((resObj) => (
           <Link key={resObj.info.id} to={"/restaurants/" + resObj.info.id}>
             {" "}
-            <RestaurantCard resData={resObj} />
+            {resObj.info.totalRatingsString > "1K+" ? (
+              <RestaurantPromoted resData={resObj} />
+            ) : (
+              <RestaurantCard resData={resObj} />
+            )}
           </Link>
         ))}
       </div>

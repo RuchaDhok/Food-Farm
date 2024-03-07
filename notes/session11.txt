@@ -1,0 +1,33 @@
+# Data is the new Oil
+
+-- Higher Order Components
+     - It's a function that takes a component and returns a component.
+     - It's a function, that takes a component as an input, enhances it and returns it back.
+
+* Creating the total Ratings label on the restro card which 10k+ ratings.
+    
+    Higher Order component
+    input -- Restaurant Card
+    output -- totalRatings > 10k+     
+
+Higher Order Components are pure functions, because we are not changing the input component. we are just enhancing it and returing.
+
+Pure functions or Components are the ones, where we don't change the props or state.
+
+--------------------------------------------------------------------------
+
+All the react applications have two layers
+    1.) UI Layer
+    2.) Data Layer
+
+    And this UI layer (consist of JSX) is powered by 
+    Data layer (consist of state,props, local variables,{whatever JS we write} )
+
+--------------------------------------------------------------------------
+
+* 
+
+https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/850b109187edc3968df3c00cc8b9c825
+
+If the state of the component is handled by it's parent then it's the controlled component.
+If the state if managed by the component itself, it's uncontrolled component.
