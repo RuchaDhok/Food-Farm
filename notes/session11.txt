@@ -29,5 +29,120 @@ All the react applications have two layers
 
 https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/850b109187edc3968df3c00cc8b9c825
 
-If the state of the component is handled by it's parent then it's the controlled component.
+If the state of the child component is handled by it's parent then it's the controlled component.
 If the state if managed by the component itself, it's uncontrolled component.
+
+# Lifting the state up 
+    - Sometimes, you want the state of two components to always change together. 
+      To do it, remove state from both of them, move it to their closest common parent, 
+      and then pass it down to them via props. This is known as lifting state up.
+
+# Props Drilling
+    - Passing data from parent to child in large project becomes cumbersome.
+    - React has one way data flow that is from parent to child.
+
+So, props drilling should be avoided.
+
+--------- # useContext() --------------
+
+- In order to avoid prop drilling and to use data of one component in anywhere in the app. we need to store the data globally.
+- React gives us useContext() to do the same.
+
+What can be the global data which we need to be accessed from anywhere.
+    e.g. logged in info
+    e.g. theme
+
+- Context is the good place where we can store the data centrally.
+
+- Keep the context in utils
+- Developing the context to store the information of logged in user.
+- Assume it's a global object for react.
+
+1.) Create context using createContext given by "react"
+    
+    UserContext.js
+    
+        import { createContext } from "react";
+
+        const UserContext = createContext({
+        loggedInUser: "Rucha Dhok",
+        emailId: "ruchadhok@gmail.com",
+        });
+
+        export default UserContext;
+
+2.) Access the context in Header component.
+
+    A.) In functional component : 
+
+     - Using react hook [ useContext() ] we can use the context data.
+         
+              import { useContext } from "react";
+              import UserContext from "../utils/UserContext";
+
+              const Header = () =>{
+                 const { loggedInUser } = useContext(UserContext);
+
+                  return <h1>{loggedInUser}</h1>
+              }
+              export default Header;
+
+     B.) In class component
+            import UserContext from "../utils/UserContext";
+
+            class About extends React.Component {
+                render(){
+                    return (
+                <div>
+                    <h1>About Class Component</h1>
+                    <UserContext.Consumer>
+                    {(data) => <h1>{data.loggedInUser}</h1>}
+                    </UserContext.Consumer>
+                </div>
+                    )
+                }
+                }
+        
+            export default About;
+
+3.) We can create as many context as we want.
+
+4.) The data which we use in multiple places, that data should be kept in the context.
+
+5.) What if we don't want to use default value of context ?
+    e.g. Suppose if I have logged in as a user, how can we modify the loggedIn user name 
+    which we are getting from api. which is provided in whole app ?
+            import UserContext from "./utils/UserContext";
+
+        const AppLayout = () =>{
+            const [userName, setUserName] = useState();
+
+            //authentication
+            useEffect(() => {
+                //Make an API call and send username and password
+                const data = {
+                name: "Rucha",
+                };
+                setUserName(data.name);
+            }, []);
+
+            return (
+            <UserContext.Provider value={{ loggedInUser: userName }}>
+            <div className="app">
+                <UserContext.Provider value={{ loggedInUser: "RRRR" }}>
+                <Header />
+                </UserContext.Provider>
+                <Outlet />
+            </div>
+            </UserContext.Provider>
+              );
+            };
+        }
+
+Header will get name as "RRR"
+and rest of the app will have name as "Rucha"
+
+If nothing is provided and we want to use the name, then it will pick the Default name which is in 
+UserContext.js
+
+

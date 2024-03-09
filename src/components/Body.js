@@ -30,7 +30,7 @@ const Body = () => {
       </>
     );
 
-  return listOfRestaurants.length === 0 ? (
+  return listOfRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -38,7 +38,7 @@ const Body = () => {
         <div className="search m-4 p-4">
           <input
             type="text"
-            className="border border-solid border-black shadow-lg"
+            className="border border-solid border-black shadow-lg p-1"
             value={searchText}
             onChange={(e) => {
               if (e.target.value == "") {
@@ -81,12 +81,16 @@ const Body = () => {
           >
             {flag ? "Top Rated Restaurants" : "All Restaurants"}
           </button>
+          <div>
+            <label> UserName : </label>
+            <input className="border border-black p-1 rounded-lg" />
+          </div>
         </div>
       </div>
       <div className="flex flex-wrap">
         {/* <RestaurantCard resData={resList[0]} />
         <RestaurantCard resData={resList[1]} /> */}
-        {listOfRestaurants.map((resObj) => (
+        {listOfRestaurants?.map((resObj) => (
           <Link key={resObj.info.id} to={"/restaurants/" + resObj.info.id}>
             {" "}
             {resObj.info.totalRatingsString > "1K+" ? (
