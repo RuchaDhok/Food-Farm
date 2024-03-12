@@ -1,7 +1,7 @@
 {
   "name": "food-farm",
   "version": "1.0.0",
-  "description": "Food Ordering App",
+  "description": "Food ordering App",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",
@@ -19,13 +19,14 @@
   "homepage": "https://github.com/RuchaDhok/Food-Farm#readme",
   "devDependencies": {
     "parcel": "^2.12.0",
-    "postcss": "^8.4.35",
     "process": "^0.11.10",
     "tailwindcss": "^3.4.1"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.2"
+    "react-redux": "^9.1.0",
+    "react-router-dom": "^6.22.3"
   }
 }

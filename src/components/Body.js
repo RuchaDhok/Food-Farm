@@ -34,7 +34,7 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="flex">
+      <div className="flex w-11/12 m-auto">
         <div className="search m-4 p-4">
           <input
             type="text"
@@ -81,14 +81,14 @@ const Body = () => {
           >
             {flag ? "Top Rated Restaurants" : "All Restaurants"}
           </button>
-          <div>
+          {/* <div>
             <label> UserName : </label>
             <input className="border border-black p-1 rounded-lg" />
-          </div>
+          </div> */}
         </div>
       </div>
-      <div className="flex flex-wrap">
-        {/* <RestaurantCard resData={resList[0]} />
+      <div className="flex flex-wrap w-11/12 m-auto">
+        {/* <RestaurantCard resData={r8sList[0]} />
         <RestaurantCard resData={resList[1]} /> */}
         {listOfRestaurants?.map((resObj) => (
           <Link key={resObj.info.id} to={"/restaurants/" + resObj.info.id}>

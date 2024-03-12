@@ -1,0 +1,58 @@
+#  REDUX
+
+- Redux work on data layer.
+- Redux is not mandatory in your application.
+- For small and mid size application, redux is not needed. 
+- Redux is needed for large scale application.
+- Redux and React are different libraries.
+- Redux is not the only library to manage state.
+        - Different libraries are : zustand
+
+- Redux offers to handle the state of our application.
+- Redux offers easy debugging using redux dev tools.
+- Redux works with other libraries and framework as well. Not only react.
+
+- Redux team gives us two libraries.
+      1.) React-Redux -- Official React bindings for Redux
+      2.) Redux Toolkit -- Newer way of writing Redux. 
+                           The Redux Toolkit package is intended to be the standard way to write Redux logic.
+
+- Older way was Redux (aka Vanilla Redux). Here, we will be using Redux Toolkit along with React-Redux
+
+- What Redux Toolkit resolves ? 
+      In the older way (Vanilla Redux) : 
+        - Configuring a Redux store was too complicated.
+        - I have to add a lot of packages to get Redux to do anything useful.
+        - Redux requires too much boilerplate code.
+
+- 
+
+
+
+# To DO - Using Redux Toolkit
+
+1.) Install redux toolkit library [@reduxjs/toolkit]
+2.) Install react-redux
+3.) Build our store
+4.) Connect our store to our app.
+5.) Create a slice (cart slice)
+6.) Dispatch an action.
+7.) Read data using selector.
+
+
+-- Create the store inside utils folder.
+-- Provide the store to our app. in App.js as this is the head of our app.
+
+
+- To optimize the performance. subscribe to the small portion of the store.
+- in appStore we have one reducer, which is the combination of number of reducers.
+- in cartSlice, we have multiple reducers. and exporting one reducer collectively.
+
+
+-- Vanilla redux (older redux) says Don't mutate state and returning was mandatory.
+                 state.items.push(action.payload); --> this was prohibited.
+                 so new state needed to create and modify it and return it
+
+-- In redux toolkit, we have to mutate the state. (but behind the scene, it's doing Vanilla redux things and it uses Immer)
+-- Redux Toolkit uses Immer behind the scenes.
+
