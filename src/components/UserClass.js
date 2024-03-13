@@ -27,7 +27,7 @@ class UserClass extends React.Component {
     });
 
     this.timer = setInterval(() => {
-      console.log("Class based Comp");
+      //console.log("Class based Comp");
     }, 1000);
     //Api Calls -- fill the data in the component and the component re renders
   }
