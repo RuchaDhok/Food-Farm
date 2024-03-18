@@ -15,7 +15,7 @@ const Body = () => {
 
   const RestaurantPromoted = withPromotedLabel(RestaurantCard);
 
-  //Conditional Rendering
+  // Conditional Rendering
   // if (listOfRestaurants.length === 0) {
   //   return <Shimmer />;
   // }
