@@ -33,7 +33,7 @@ const AppLayout = () => {
     <Provider store={appStore}>
       <UserContext.Provider value={{ loggedInUser: userName }}>
         <div className="app">
-          <UserContext.Provider value={{ loggedInUser: "RRRR" }}>
+          <UserContext.Provider value={{ loggedInUser: "Rucha Dhok" }}>
             <Header />
           </UserContext.Provider>
           <Outlet />
